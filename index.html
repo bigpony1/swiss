@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>스위스 7박 8일 여행 일정 9월 5~12일</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --sky: #3a7bd5;
+      --skylight: #e8f1fb;
+      --ice: #2a6ab5;
+      --gold: #c8a44a;
+      --soft: #4a7ab5;
+      --text: #1a2535;
+      --muted: #5a7090;
+      --border: #dce8f5;
+      --cardbg: #f7faff;
+      --tagbg: #eef4fc;
+      --kidsbg: #f0f8fc;
+      --kidsborder: #c0dff0;
+      --footerbg: #f0f4fa;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #ffffff;
+      color: var(--text);
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+
+    /* TIMELINE */
+    .timeline-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 20px 60px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 32px;
+    }
+
+    .section-label {
+      font-size: 0.82rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--text);
+    }
+
+    .section-meta {
+      margin-top: 14px;
+      font-size: 0.92rem;
+      color: var(--muted);
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .section-meta span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* DAY CARDS */
+    .days-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .day-row {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      opacity: 0;
+      animation: slideIn 0.6s ease forwards;
+      margin-bottom: 35px;
+    }
+
+    .day-row:nth-child(1) {
+      animation-delay: 0.05s;
+    }
+
+    .day-row:nth-child(2) {
+      animation-delay: 0.12s;
+    }
+
+    .day-row:nth-child(3) {
+      animation-delay: 0.19s;
+    }
+
+    .day-row:nth-child(4) {
+      animation-delay: 0.26s;
+    }
+
+    .day-row:nth-child(5) {
+      animation-delay: 0.33s;
+    }
+
+    .day-row:nth-child(6) {
+      animation-delay: 0.40s;
+    }
+
+    .day-row:nth-child(7) {
+      animation-delay: 0.47s;
+    }
+
+    .day-row:nth-child(8) {
+      animation-delay: 0.54s;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .day-marker {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-left: 10px;
+    }
+
+    .day-num {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--sky), #2255b0);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: white;
+      box-shadow: 0 4px 16px rgba(58, 123, 213, 0.3);
+      flex-shrink: 0;
+    }
+
+    .day-num small {
+      font-size: 0.48rem;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 400;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: -2px;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .day-line {
+      display: none;
+    }
+
+    .day-row:last-child .day-line {
+      display: none;
+    }
+
+    .day-card {
+      background: var(--cardbg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 32px;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .day-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--sky), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .day-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(58, 123, 213, 0.4);
+      box-shadow: 0 12px 40px rgba(58, 123, 213, 0.1);
+    }
+
+    .day-card:hover::before {
+      opacity: 1;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .card-location {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .location-emoji {
+      font-size: 1.6rem;
+    }
+
+    .location-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .location-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 3px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .stay-badge {
+      background: rgba(200, 164, 74, 0.1);
+      border: 1px solid rgba(200, 164, 74, 0.35);
+      color: #9a7a2a;
+      font-size: 0.76rem;
+      padding: 5px 14px;
+      border-radius: 100px;
+      white-space: nowrap;
+      letter-spacing: 0.3px;
+      font-weight: 500;
+    }
+
+    .activities {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 14px;
+    }
+
+    .activity-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.95rem;
+      color: #2a3d55;
+      line-height: 1.6;
+    }
+
+    .act-icon {
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .kids-tip {
+      background: var(--kidsbg);
+      border: 1px solid var(--kidsborder);
+      border-radius: 10px;
+      padding: 11px 16px;
+      font-size: 0.86rem;
+      color: #2a5570;
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin-top: 14px;
+    }
+
+    .kids-tip-label {
+      font-weight: 700;
+      color: #1a5a80;
+      white-space: nowrap;
+      font-size: 0.82rem;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 14px;
+    }
+
+    .tag {
+      background: var(--tagbg);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 4px 12px;
+      font-size: 0.76rem;
+      color: var(--soft);
+      font-weight: 500;
+    }
+
+    /* TIPS SECTION */
+    .tips-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 20px 80px;
+    }
+
+    .tips-header {
+      text-align: center;
+      margin-bottom: 40px;
+      border-top: 1px solid var(--border);
+      padding-top: 50px;
+    }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .tip-card {
+      background: var(--cardbg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 26px;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+
+    .tip-card:hover {
+      box-shadow: 0 8px 30px rgba(58, 123, 213, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .tip-icon {
+      font-size: 2rem;
+      margin-bottom: 13px;
+    }
+
+    .tip-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 9px;
+    }
+
+    .tip-body {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 36px 20px;
+      background: var(--footerbg);
+      border-top: 1px solid var(--border);
+      font-size: 0.82rem;
+      color: var(--muted);
+      letter-spacing: 1.5px;
+    }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+      .day-row {
+        margin-bottom: 25px;
+      }
+
+      .day-card {
+        padding: 20px 16px;
+      }
+
+      .location-name {
+        font-size: 1.2rem;
+      }
+
+      .day-num {
+        width: 46px;
+        height: 46px;
+        font-size: 1rem;
+      }
+
+      .activity-item {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- TIMELINE -->
+  <section class="timeline-section">
+    <div class="section-header">
+      <p class="section-label">Day by Day Schedule</p>
+      <h2 class="section-title">스위스 여행 일정</h2>
+      <div class="section-meta">
+        <span>🏔️ 26년 9월 5일~12일(7박 8일)</span>
+        <span>👨‍👩‍👧 성인 6명 · 아이 2명</span>
+      </div>
+    </div>
+
+    <div class="days-grid">
+      <!-- DAY 1 -->
+      <div class="day-row">
+        <div class="day-marker">
+          <div class="day-num">1<small>DAY</small></div>
+          <div class="day-line"></div>
+        </div>
+        <div class="day-card">
+          <div class="card-top">
+            <div class="card-location">
+              <span class="location-emoji">✈️</span>
+              <div>
+                <div class="location-name">취리히 도착 및 렌트카 이동</div>
+                <div class="location-sub">Zurich Arrival · Grindelwald</div>
+              </div>
+            </div>
+            <span class="stay-badge">🛏 그린델발트 숙박</span>
+          </div>
+          <div class="activities">
+            <div class="activity-item"><span class="act-icon">🛬</span> 취리히 공항 도착 : 17:30(스위스 시간)</div>
+            <div class="activity-item"><span class="act-icon">🛒</span> ① 취리히 공항 마트 장보기 (영업시간 - 쿱 6:00~23:00 or 미그로스
+              6:15~23:00)</div>
+            <div class="activity-item"><span class="act-icon">🚗</span> ② 렌트카 수령 — 취리히 공항 렌트카 타고 그린델발트 숙소로 출발
+              (거리 152km,약2:00~2:30분 소요)</div>
+            <div class="activity-item"><span class="act-icon">🏡</span> 그린델발트 도착 후 휴식 (21~22시)</div>
+          </div>
+          <div class="tag-row">
+            <span class="tag">공항 도착</span><span class="tag">마트 장보기</span><span class="tag">렌트카 이동</span><span
+              class="tag">숙소 휴식</span>
+          </div>
+        </div>
+      </div>
+
+          <!-- DAY 2 -->
+          <div class="day-row">
+            <div class="day-marker">
+              <div class="day-num">2<small>DAY</small></div>
+              <div class="day-line"></div>
+            </div>
+            <div class="day-card">
+              <div class="card-top">
+                <div class="card-location">
+                  <span class="location-emoji">⛰️</span>
+                  <div>
+                    <div class="location-name">인터라켄 및 호수 탐방</div>
+                    <div class="location-sub">Interlaken · Iseltwald · Giessbach</div>
+                  </div>
+                </div>
+                <span class="stay-badge">🛏 그린델발트 숙박</span>
+              </div>
+              <div class="activities">
+                <div class="activity-item"><span class="act-icon">⏰</span> 오전 — 출발시간 정해놓지 않음, 여유롭게 출발</div>
+                <div class="activity-item"><span class="act-icon">🚗</span> ① 그린델발트 → 인터라켄 이동 (자동차 21.7km 약 30분 / 기차 이용시
+                  오스트역까지 1~1.5시간 소요)</div>
+                <div class="activity-item"><span class="act-icon">🏔️</span> ② 인터라켄 하더쿨름(Harderbahn) 전망대 관람 (약 2-3시간 코스)
+                </div>
+                <div class="activity-item"><span class="act-icon">🌊</span> ③ 브리엔츠 호수 이젤발트(Iseltward) 산책 →
+                  기스바흐(Giessbach) 폭포 탐방</div>
+                <div class="activity-item"><span class="act-icon">🛒</span> ④ 인터라켄 웨스트 쿱에서 장보기 (영업시간 7:30~21:00, 동역
+                  쿱/웨스트역 미그로스는 일요일 휴무 주의)</div>
+                <div class="activity-item"><span class="act-icon">🏡</span> ⑤ 그린델발트 숙소 복귀 (시간 정해놓지 않음)</div>
+              </div>
+              <div class="tag-row">
+                <span class="tag">하더쿨름 전망대</span><span class="tag">이젤발트</span><span class="tag">기스바흐 폭포</span><span
+                  class="tag">마트 장보기</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- DAY 3 -->
+          <div class="day-row">
+            <div class="day-marker">
+              <div class="day-num">3<small>DAY</small></div>
+              <div class="day-line"></div>
+            </div>
+            <div class="day-card">
+              <div class="card-top">
+                <div class="card-location">
+                  <span class="location-emoji">🌊</span>
+                  <div>
+                    <div class="location-name">그린델발트 퍼스트 + 라우터브루넨</div>
+                    <div class="location-sub">First 2,168m · Lauterbrunnen Valley</div>
+                  </div>
+                </div>
+                <span class="stay-badge">🛏 그린델발트 숙박</span>
+              </div>
+              <div class="activities">
+                <div class="activity-item"><span class="act-icon">🚡</span> 오전 — 퍼스트 곤돌라 탑승, 퍼스트 클리프 워크 (아찔한 절벽 전망대)
+                </div>
+                <div class="activity-item"><span class="act-icon">🛷</span> 퍼스트 플라이어 집라인 (성인 권장, 7세 아이는 트로티바이크 대신 하이킹)
+                </div>
+                <div class="activity-item"><span class="act-icon">🚂</span> 오후 — 라우터브루넨 이동 (그린델발트 → 라우터브루넨 기차)</div>
+                <div class="activity-item"><span class="act-icon">💧</span> 트뤼멜바흐 폭포 관람 (바위 속 빙하 폭포, 세계적 명소)</div>
+                <div class="activity-item"><span class="act-icon">🏘️</span> 슈타우프바흐 폭포 마을 산책 후 귀환</div>
+              </div>
+              <div class="kids-tip">
+                <span>🧒</span>
+                <span><span class="kids-tip-label">아이 포인트 ·</span> 트뤼멜바흐 폭포는 엘리베이터로 올라가 동굴 폭포를 보는 구조라 아이들에게 매우 인기. 퍼스트
+                  클리프
+                  워크도 안전 난간 있어 OK.</span>
+              </div>
+              <div class="tag-row">
+                <span class="tag">퍼스트 곤돌라</span><span class="tag">클리프 워크</span><span class="tag">트뤼멜바흐 폭포</span><span
+                  class="tag">라우터브루넨</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- DAY 4 -->
+          <div class="day-row">
+            <div class="day-marker">
+              <div class="day-num">4<small>DAY</small></div>
+              <div class="day-line"></div>
+            </div>
+            <div class="day-card">
+              <div class="card-top">
+                <div class="card-location">
+                  <span class="location-emoji">🛥️</span>
+                  <div>
+                    <div class="location-name">인터라켄</div>
+                    <div class="location-sub">Interlaken · Between Two Lakes</div>
+                  </div>
+                </div>
+                <span class="stay-badge">🛏 인터라켄 숙박</span>
+              </div>
+              <div class="activities">
+                <div class="activity-item"><span class="act-icon">🚞</span> 오전 — 그린델발트 체크아웃 → 인터라켄 이동 (기차 30분)</div>
+                <div class="activity-item"><span class="act-icon">🏔️</span> 하더쿨름 전망대 — 인터라켄 & 두 호수 파노라마 (푸니쿨라 10분)
+                </div>
+                <div class="activity-item"><span class="act-icon">⛵</span> 툰 호수 유람선 크루즈 (호수 주변 성과 알프스 풍경)</div>
+                <div class="activity-item"><span class="act-icon">🛍️</span> 인터라켄 구시가지 쇼핑 (시계 · 초콜릿 · 기념품)</div>
+                <div class="activity-item"><span class="act-icon">🍫</span> 스위스 초콜릿 & 치즈 디너</div>
+              </div>
+              <div class="kids-tip">
+                <span>🧒</span>
+                <span><span class="kids-tip-label">아이 포인트 ·</span> 유람선에서 백조 먹이주기, 하더쿨름 정상의 "두 개의 호수를 동시에 보는 포토존"은 어린이도
+                  신나합니다.</span>
+              </div>
+              <div class="tag-row">
+                <span class="tag">하더쿨름</span><span class="tag">툰 호수 크루즈</span><span class="tag">초콜릿 쇼핑</span><span
+                  class="tag">인터라켄 시내</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- DAY 5 -->
+          <div class="day-row">
+            <div class="day-marker">
+              <div class="day-num">5<small>DAY</small></div>
+              <div class="day-line"></div>
+            </div>
+            <div class="day-card">
+              <div class="card-top">
+                <div class="card-location">
+                  <span class="location-emoji">🦁</span>
+                  <div>
+                    <div class="location-name">루체른</div>
+                    <div class="location-sub">Lucerne · Chapel Bridge City</div>
+                  </div>
+                </div>
+                <span class="stay-badge">🛏 루체른 숙박</span>
+              </div>
+              <div class="activities">
+                <div class="activity-item"><span class="act-icon">🚂</span> 오전 — 인터라켄 → 루체른 이동 (기차 약 2시간)</div>
+                <div class="activity-item"><span class="act-icon">🌉</span> 카펠교 (카펠브뤼케) & 구시가지 워킹 투어</div>
+                <div class="activity-item"><span class="act-icon">🦁</span> 빈사의 사자상 & 빙하 공원 관람</div>
+                <div class="activity-item"><span class="act-icon">🚢</span> 루체른 호수 유람선 또는 호숫가 산책</div>
+                <div class="activity-item"><span class="act-icon">🎡</span> 저녁 — 루체른 구시가지 광장 야경 & 레스토랑 디너</div>
+              </div>
+              <div class="kids-tip">
+                <span>🧒</span>
+                <span><span class="kids-tip-label">아이 포인트 ·</span> 빙하 공원(Gletschergarten)에 아이들이 좋아하는 거울 미로가 있어요. 카펠교 위에서
+                  오리에게 손 흔들기도 인기.</span>
+              </div>
+              <div class="tag-row">
+                <span class="tag">카펠교</span><span class="tag">빙하 공원</span><span class="tag">빈사의 사자상</span><span
+                  class="tag">호수
+                  유람</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- DAY 6 -->
+          <div class="day-row">
+            <div class="day-marker">
+              <div class="day-num">6<small>DAY</small></div>
+              <div class="day-line"></div>
+            </div>
+            <div class="day-card">
+              <div class="card-top">
+                <div class="card-location">
+                  <span class="location-emoji">🚡</span>
+                  <div>
+                    <div class="location-name">리기산 또는 필라투스산</div>
+                    <div class="location-sub">Mt. Rigi 1,798m / Mt. Pilatus 2,132m</div>
+                  </div>
+                </div>
+                <span class="stay-badge">🛏 루체른 숙박</span>
+              </div>
+              <div class="activities">
+                <div class="activity-item"><span class="act-icon">⛵</span> 루체른 → 유람선으로 피츠나우 이동 → 리기 산악열차 탑승 (세계 최초 산악열차)
+                </div>
+                <div class="activity-item"><span class="act-icon">🌄</span> 리기쿨름 정상 — 알프스 360° 파노라마 & 구름 위 산책</div>
+                <div class="activity-item"><span class="act-icon">🎿</span> 리기 썰매 코스 또는 트레킹 (계절 따라)</div>
+                <div class="activity-item"><span class="act-icon">🚠</span> 하산 후 아트 & 크라프트 마을 베기스 탐방</div>
+                <div class="activity-item"><span class="act-icon">🍷</span> 루체른 귀환 후 와인 바 & 퐁듀 저녁</div>
+              </div>
+              <div class="kids-tip">
+                <span>🧒</span>
+                <span><span class="kids-tip-label">아이 포인트 ·</span> 리기 산악열차는 1871년 개통된 역사 열차로 어린이들도 탑승 자체를 즐깁니다. 정상에서 썰매는
+                  최고의
+                  추억!</span>
+              </div>
+              <div class="tag-row">
+                <span class="tag">리기산</span><span class="tag">산악열차</span><span class="tag">유람선 이동</span><span
+                  class="tag">360도
+                  전망</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- DAY 7 -->
+          <div class="day-row">
+            <div class="day-marker">
+              <div class="day-num">7<small>DAY</small></div>
+              <div class="day-line"></div>
+            </div>
+            <div class="day-card">
+              <div class="card-top">
+                <div class="card-location">
+                  <span class="location-emoji">🏙️</span>
+                  <div>
+                    <div class="location-name">취리히</div>
+                    <div class="location-sub">Zurich · Switzerland's Largest City</div>
+                  </div>
+                </div>
+                <span class="stay-badge">🛏 취리히 숙박</span>
+              </div>
+              <div class="activities">
+                <div class="activity-item"><span class="act-icon">🚂</span> 오전 — 루체른 → 취리히 이동 (기차 약 50분)</div>
+                <div class="activity-item"><span class="act-icon">🕍</span> 구시가지 (알트슈타트) 산책 — 그로스뮌스터 & 린덴호프 언덕</div>
+                <div class="activity-item"><span class="act-icon">🛍️</span> 반호프슈트라세 (명품 거리) 쇼핑 & 스위스 기념품 구매</div>
+                <div class="activity-item"><span class="act-icon">🌊</span> 취리히 호수 산책 & 벤치 피크닉</div>
+                <div class="activity-item"><span class="act-icon">🍽️</span> 여행 마지막 저녁 — 취리히 레스토랑 갈라 디너</div>
+              </div>
+              <div class="kids-tip">
+                <span>🧒</span>
+                <span><span class="kids-tip-label">아이 포인트 ·</span> 린덴호프 언덕에서 대형 체스 게임 즐기기. 리트베르크 박물관 (어린이 전시 풍부) 또는 취리히
+                  동물원
+                  (반나절 코스)도 추천.</span>
+              </div>
+              <div class="tag-row">
+                <span class="tag">구시가지</span><span class="tag">쇼핑</span><span class="tag">취리히 호수</span><span
+                  class="tag">갈라
+                  디너</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- DAY 8 -->
+          <div class="day-row">
+            <div class="day-marker">
+              <div class="day-num">8<small>DAY</small></div>
+              <div class="day-line"></div>
+            </div>
+            <div class="day-card">
+              <div class="card-top">
+                <div class="card-location">
+                  <span class="location-emoji">✈️</span>
+                  <div>
+                    <div class="location-name">취리히 공항 출발</div>
+                    <div class="location-sub">Zurich Airport ZRH · Homeward Bound</div>
+                  </div>
+                </div>
+                <span class="stay-badge">🏠 귀국</span>
+              </div>
+              <div class="activities">
+                <div class="activity-item"><span class="act-icon">☀️</span> 아침 — 여유로운 조식 & 마지막 취리히 호수 산책</div>
+                <div class="activity-item"><span class="act-icon">🛒</span> 취리히 공항 면세점 — 스위스 초콜릿 (린트 · 슈프룽글리), 시계 최종 쇼핑
+                </div>
+                <div class="activity-item"><span class="act-icon">✈️</span> 취리히 공항 출발 (공항 내 기차역 직결 — 시내에서 12분)</div>
+              </div>
+              <div class="kids-tip">
+                <span>🧒</span>
+                <span><span class="kids-tip-label">아이 포인트 ·</span> 취리히 공항은 키즈 플레이 존이 잘 갖춰져 있어요. 탑승 전 아이들 에너지 발산 시간을 충분히
+                  주세요!</span>
+              </div>
+              <div class="tag-row">
+                <span class="tag">공항 이동</span><span class="tag">면세 쇼핑</span><span class="tag">초콜릿 쇼핑</span><span
+                  class="tag">귀국</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+  </section>
+
+  <!-- TIPS -->
+  <div class="tips-section">
+    <div class="tips-header">
+      <p class="section-label">Travel Tips</p>
+      <h2 class="section-title">여행 준비 팁</h2>
+    </div>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-icon">🎟️</div>
+        <div class="tip-title">스위스 트래블 패스</div>
+        <div class="tip-body">기차 · 버스 · 유람선 무제한 이용 가능. 8일권 구매 시 대부분의 교통비 커버. 아이 (6~15세)는 Family Card 신청 시 무료 탑승 가능합니다.
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🧥</div>
+        <div class="tip-title">복장 준비</div>
+        <div class="tip-body">산 위는 여름에도 0~10°C. 아이들 방한복 · 방수 재킷 필수. 야외 활동용 트레킹화 & 어린이용 선글라스 · 썬크림도 챙기세요.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🏨</div>
+        <div class="tip-title">숙소 유형 추천</div>
+        <div class="tip-body">8명 대가족에는 아파트형 숙소 (Apartment / Chalet) 추천. 취사 가능하고 공간이 넓어 아이들도 편합니다. Airbnb · Booking.com에서
+          8인 필터 활용.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">💰</div>
+        <div class="tip-title">예산 팁</div>
+        <div class="tip-body">스위스는 물가가 높습니다. 슈퍼마켓(Migros · Coop) 활용해 간식·도시락 준비. 점심은 저렴하게, 저녁은 특별하게 전략 추천.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🚂</div>
+        <div class="tip-title">교통 이동 팁</div>
+        <div class="tip-body">스위스 기차는 정시 운행. 대가족은 조금 일찍 플랫폼에 나가 좌석 확보를 미리 해두는 것이 좋습니다. 좌석 예약은 추가 요금 필요.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">👶</div>
+        <div class="tip-title">아이와 함께</div>
+        <div class="tip-body">융프라우 고산 활동은 아이들에게 고산증이 올 수 있으니 여유 있게 올라가세요. 간식과 물을 충분히 준비하고, 하루에 1~2개 핵심 활동 위주로 짜세요.</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    ✦ Switzerland 7N8D Family Itinerary · 성인 6명 · 아이 2명 ✦
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+        }
+      });
+    }, { threshold: 0.05 });
+
+    document.querySelectorAll('.day-row').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+
+</html>
